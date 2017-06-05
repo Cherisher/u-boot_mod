@@ -58,6 +58,8 @@ ifndef CROSS_COMPILE
 endif
 export CROSS_COMPILE
 
+export PATH:=/home/candoit/lede-17.01/staging_dir/toolchain-mips_24kc_gcc-5.4.0_musl-1.1.16/bin:$(PATH)
+
 # By default, optimization for size (-Os) is enabled, set below option
 # to n or remove it if you want only basic optimization (-O/-O1)
 # BUILD_OPTIMIZED = n
@@ -236,10 +238,13 @@ COMMON_ETHS27_TARGETS = \
 	tp-link_tl-wr841n_v11 \
 	tp-link_tl-wr841n_v8 \
 	tp-link_tl-wr841n_v9 \
-	tp-link_tl-wr842n_v3
+	tp-link_tl-wr842n_v3 \
 
 $(COMMON_ETHS27_TARGETS):
 	@$(call build,123,1,ETH_CONFIG=_s27)
+
+anshion_as-150_v1:
+	@$(call build,185,1,ETH_CONFIG=_s27,DEVICE_VENDOR=dragino)
 
 8devices_carambola2 \
 alfa-network_hornet-ub \

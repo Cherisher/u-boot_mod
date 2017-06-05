@@ -121,6 +121,17 @@
 	#define CONFIG_QCA_GPIO_MASK_IN		GPIO0 | GPIO1
 	#define CONFIG_QCA_GPIO_MASK_OUT_INIT_H	CONFIG_QCA_GPIO_MASK_LED_ACT_L
 
+#elif defined(CONFIG_FOR_ANSHION_AS150_V1)
+
+	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO2  | GPIO3  | GPIO4  |\
+						GPIO11 | GPIO12 | GPIO13 |\
+						GPIO14 | GPIO15 | GPIO16 |\
+						GPIO17
+
+	#define CONFIG_QCA_GPIO_MASK_OUT	CONFIG_QCA_GPIO_MASK_LED_ACT_L
+	#define CONFIG_QCA_GPIO_MASK_IN		GPIO0 | GPIO1
+	#define CONFIG_QCA_GPIO_MASK_OUT_INIT_H	CONFIG_QCA_GPIO_MASK_LED_ACT_L
+
 #elif defined(CONFIG_FOR_WALLYS_DR531)
 
 	#define CONFIG_QCA_GPIO_MASK_LED_ACT_L	GPIO11 | GPIO12 | GPIO13 |\
@@ -213,6 +224,12 @@
 				"rootfstype=jffs2 init=/sbin/init "\
 				"mtdparts=ath-nor0:32k(u-boot1),32k(u-boot2),3008k(rootfs),896k(uImage),64k(mib0),64k(ART)"
 
+#elif defined(CONFIG_FOR_ANSHION_AS150_V1)
+
+	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
+				"rootfstype=jffs2 init=/sbin/init noinitrd" \
+				"mtdparts=ath-nor0:256k(u-boot),64k(u-boot-env),14528k(rootfs),1408k(uImage),64k(mib0),64k(ART)"
+
 #elif defined(CONFIG_FOR_WALLYS_DR531)
 
 	#define CONFIG_BOOTARGS	"console=ttyS0,115200 root=31:02 "\
@@ -239,6 +256,8 @@
     defined(CONFIG_FOR_TPLINK_WR841N_V9)    ||\
     defined(CONFIG_FOR_TPLINK_WR842N_V3)
 	#define CFG_LOAD_ADDR	0x9F020000
+#elif defined(CONFIG_FOR_ANSHION_AS150_V1)
+	#define CFG_LOAD_ADDR	0x9fE80000
 #elif defined(CONFIG_FOR_P2W_CPE505N)    ||\
       defined(CONFIG_FOR_P2W_R602N)      ||\
       defined(CONFIG_FOR_WALLYS_DR531)   ||\
@@ -289,6 +308,10 @@
 	#define CFG_ENV_ADDR		0x9F01EC00
 	#define CFG_ENV_SIZE		0x1000
 	#define CFG_ENV_SECT_SIZE	0x10000
+#elif defined(CONFIG_FOR_ANSHION_AS150_V1)
+	#define CFG_ENV_ADDR        0x9F01EC00
+	#define CFG_ENV_SIZE        0x1000
+	#define CFG_ENV_SECT_SIZE   0x10000
 #elif defined(CONFIG_FOR_WALLYS_DR531)
 	#define CFG_ENV_ADDR		0x9F030000
 	#define CFG_ENV_SIZE		0xF800
@@ -340,6 +363,12 @@
 	#define OFFSET_MAC_ADDRESS		0x00FC00
 	#define OFFSET_ROUTER_MODEL		0x00FD00
 	#define OFFSET_PIN_NUMBER		0x00FE00
+#elif defined(CONFIG_FOR_ANSHION_AS150_V1)
+	#define OFFSET_MAC_DATA_BLOCK       0x010000
+    #define OFFSET_MAC_DATA_BLOCK_LENGTH    0x010000
+    #define OFFSET_MAC_ADDRESS      0x00FC00
+    #define OFFSET_ROUTER_MODEL     0x00FD00
+    #define OFFSET_PIN_NUMBER       0x00FE00
 #elif defined(CONFIG_FOR_WALLYS_DR531)
 	#define OFFSET_MAC_DATA_BLOCK		0x030000
 	#define OFFSET_MAC_DATA_BLOCK_LENGTH	0x010000
@@ -393,6 +422,8 @@
     defined(CONFIG_FOR_TPLINK_WR841N_V9)    ||\
     defined(CONFIG_FOR_TPLINK_WR842N_V3)
 	#define WEBFAILSAFE_UPLOAD_LIMITED_AREA_IN_BYTES	(192 * 1024)
+#elif defined(CONFIG_FOR_ANSHION_AS150_V1)
+	#define WEBFAILSAFE_UPLOAD_LIMITED_AREA_IN_BYTES	(192 * 1024)
 #elif defined(CONFIG_FOR_TPLINK_WA850RE_V2)
 	#define WEBFAILSAFE_UPLOAD_LIMITED_AREA_IN_BYTES	(448 * 1024)
 #elif defined(CONFIG_FOR_P2W_CPE505N)    ||\
@@ -429,7 +460,8 @@
     defined(CONFIG_FOR_TPLINK_WR841N_V10)   ||\
     defined(CONFIG_FOR_TPLINK_WR841N_V11)   ||\
     defined(CONFIG_FOR_TPLINK_WR841N_V9)    ||\
-    defined(CONFIG_FOR_TPLINK_WR842N_V3)
+    defined(CONFIG_FOR_TPLINK_WR842N_V3)	||\
+	defined(CONFIG_FOR_ANSHION_AS150_V1)
 
 	#define CONFIG_QCA_PLL_IN_FLASH_BLOCK_OFFSET	0x10000
 	#define CONFIG_QCA_PLL_IN_FLASH_BLOCK_SIZE	0x10000
